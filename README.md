@@ -40,3 +40,18 @@ To assist we have:
 2.  Execute the "python etl.py" file in the Terminal to insert all records in the tables.
 
 ## Example Queries
+
+#### Amount of music heard per day of the week
+~~~ SELECT case
+           when weekday = 0 then 'Sunday'
+           when weekday = 1 then 'Monday'
+           when weekday = 2 then 'Tuesday'
+           when weekday = 3 then 'Wednesday'
+           when weekday = 4 then 'Thursday'
+           when weekday = 5 then 'Friday'
+           when weekday = 6 then 'Saturday' end as weekday,
+       COUNT(songplay_id)                          songs
+FROM songplays s
+         JOIN time t ON s.start_time = t.start_time
+GROUP BY 1
+ORDER BY songs DESC ~~~
