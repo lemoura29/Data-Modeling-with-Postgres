@@ -42,7 +42,8 @@ To assist we have:
 ## Example Queries
 
 #### Amount of music heard per day of the week
-~~~ SELECT case
+~~~ 
+SELECT case
            when weekday = 0 then 'Sunday'
            when weekday = 1 then 'Monday'
            when weekday = 2 then 'Tuesday'
@@ -54,4 +55,32 @@ To assist we have:
 FROM songplays s
          JOIN time t ON s.start_time = t.start_time
 GROUP BY 1
-ORDER BY songs DESC ~~~
+ORDER BY songs DESC 
+~~~
+
+#### Amount of music heard by gender
+
+```
+SELECT case when gender = 'F' then 'Woman' else 'Man' end as gender, COUNT(*)
+FROM songplays s
+         JOIN users u ON s.user_id = u.user_id
+GROUP BY 1
+ORDER BY gender DESC
+```
+
+####  Duration by artist
+```
+SELECT a.name, SUM(duration) 
+                      FROM songplays s 
+                      JOIN artists a ON s.artist_id = a.artist_id 
+                      JOIN songs sg ON sg.song_id = s.song_id 
+                      GROUP BY 1
+```
+
+#### Amount by level
+```
+SELECT level, COUNT(*) status 
+                 FROM songplays 
+                 GROUP BY 1 
+                 ORDER BY status DESC
+```
