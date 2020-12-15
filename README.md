@@ -11,6 +11,8 @@ The DB consists of the following tables organized in a star schema:
 -   Fact table: songplays
 -   Dimension table: users, songs, artists and time
 
+![alt text](https://github.com/lemoura29/Data-Modeling-with-Postgres/blob/main/modelagem.png)
+
 ### Datastes
 #### Song Dataset
 This dataset contains metadata about a song and the artist of that song. The files are partitioned by the first three letters of each song's track ID.
