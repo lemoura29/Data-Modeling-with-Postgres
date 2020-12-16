@@ -7,6 +7,18 @@ from sql_queries import *
 
 
 def process_song_file(cur, filepath):
+    """
+        Description: This function can be used to read the file in the filepath (data/log_data)
+        to get the user and time info and used to populate the users and time dim tables.
+
+        Arguments:
+            cur: the cursor object. 
+            filepath: log data file path. 
+
+        Returns:
+            None
+    """
+    
     # open song file
     df =  pd.read_json(filepath, lines=True)
 
@@ -20,6 +32,16 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
+    """
+        Description: Read log_file and insert the data into tables: time, users and songplay
+
+        Arguments:
+            cur: the cursor object. 
+            filepath: log data file path. 
+
+        Returns:
+            None
+    """
     # open log file
     df = pd.read_json(filepath,lines=True)
 
@@ -64,6 +86,18 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+    """
+        Description: Processes JSON files for a data directory path according to the function passed by parameter. 
+
+        Arguments:
+            cur: the cursor object. 
+            filepath: log data file path. 
+            conn: database connection
+            func: function will be executed
+
+        Returns:
+            None
+    """
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -82,6 +116,17 @@ def process_data(cur, conn, filepath, func):
         print('{}/{} files processed.'.format(i, num_files))
         
 def execute_query(cur, func, text):
+    """
+        Description: executes and prints the query results passed by parameter. 
+
+        Arguments:
+            cur: the cursor object. 
+            func: query will be executed.
+            text: query description
+
+        Returns:
+            None
+    """
     print(text)
     cur.execute(func)
     results = cur.fetchall()
@@ -90,6 +135,17 @@ def execute_query(cur, func, text):
         print(f'{row[0]} - {row[1]}')
 
 def execute_query_exemples(cur):
+    """
+        Description: calls function 'execute_query' passing each example query. 
+
+        Arguments:
+            cur: the cursor object. 
+            func: query will be executed.
+            text: query description
+
+        Returns:
+            None
+    """
     
     print('\n###  QUERY EXAMPLES  ###')
     execute_query(cur, COUNT_WEEKDAY, '\n1- Amount of music heard per day of the week')

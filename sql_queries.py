@@ -11,21 +11,21 @@ songplay_table_drop = "DROP TABLE IF EXISTS songplays"
 
 user_table_create = ("""CREATE TABLE IF NOT EXISTS users (
                             user_id    int PRIMARY KEY,
-                            first_name text,
+                            first_name text NOT NULL,
                             last_name  text,
                             gender     text,
-                            level      text ); """)
+                            level      text NOT NULL); """)
 
 song_table_create = ("""CREATE TABLE IF NOT EXISTS songs (
                             song_id   text PRIMARY KEY,
-                            title     text,
+                            title     text NOT NULL,
                             artist_id text,
                             year      int,
                             duration  decimal ); """)
 
 artist_table_create = ("""CREATE TABLE IF NOT EXISTS artists (
                                 artist_id text PRIMARY KEY,
-                                name      text,
+                                name      text NOT NULL,
                                 location  text,
                                 latitude  float,
                                 longitude float
@@ -43,12 +43,12 @@ time_table_create = ("""CREATE TABLE IF NOT EXISTS time (
 
 songplay_table_create = ("""CREATE TABLE IF NOT EXISTS songplays (
                                 songplay_id serial PRIMARY KEY,
-                                start_time timestamp, 
-                                user_id int, 
-                                level text, 
+                                start_time timestamp NOT NULL, 
+                                user_id int NOT NULL, 
+                                level text NOT NULL, 
                                 song_id text,
                                 artist_id text, 
-                                session_id int,
+                                session_id int NOT NULL ,
                                 location text, 
                                 user_agent text,
                                 CONSTRAINT user_id
